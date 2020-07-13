@@ -1,0 +1,9 @@
+.t3
+{
+    display: block;
+    max-width:200vw;
+}
+.mat-dialog-actions button
+{
+    float:right;
+}

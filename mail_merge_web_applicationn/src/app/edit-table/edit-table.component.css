@@ -1,0 +1,16 @@
+.t1{
+    display: block;
+    max-width:200vw;
+  }
+  
+  .form {
+    display: block;
+    margin: 2px;
+   
+  }
+  
+  .mat-form-field {
+    font-size: 11pt;
+    inline-size: 1;
+   
+  }

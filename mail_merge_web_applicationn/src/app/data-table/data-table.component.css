@@ -1,0 +1,226 @@
+ .table_toolbar
+ {
+   background-color: #333;
+   position: relative;
+ }
+ .spacer
+{
+  flex: 10 10 auto;
+}
+.myIcon{
+  margin: 3px;
+  color:white;
+}
+.mySpan{
+  margin-left:10px;
+  color:white;
+}
+ .table_toolbar button{
+  margin: 3px;
+ }
+.table_toolbar input{
+  color:black;
+  background-color: #f5f5f5;
+  height: 36px;
+  border: #333;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  border: none;
+  margin:-3px 0px 5px -2px;
+}
+
+.search_label
+{
+ color:black;
+ font-size: 24px;
+}
+.search_icon
+{
+  color:black;
+  size: 10%;
+}
+ 
+ .mat-row:hover 
+{ 
+    background-color: #f5f5f5;
+}
+.mat-table{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Varela Round', sans-serif;
+  position: relative;
+  padding:2px 2px 2px 2px;
+  height:770px;
+  max-height: auto;
+}
+
+.mat-column-select,
+.mat-column-id_Filter
+{
+  flex: 0 0 4%;
+}
+
+.mat-column-firstName,
+.mat-column-firstName_Filter 
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 6%;
+}
+.mat-column-lastName,
+.mat-column-lastName_Filter 
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 6%;
+}
+.mat-column-email,
+.mat-column-email_Filter 
+{
+  color:#566787;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  flex: 0 0 14%;
+}
+.mat-column-companyName,
+.mat-column-company_Filter
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 10%;
+}
+.mat-column-country,
+.mat-column-country_Filter
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 9%;
+}
+.mat-column-city,
+.mat-column-city_Filter
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 9%;
+}
+.mat-column-addressLine1,
+.mat-column-address1_Filter
+ {
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 10%;
+}
+.mat-column-addressLine2,
+.mat-column-address2_Filter 
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0  10%;
+}
+.mat-column-zipCode,
+.mat-column-zipcode_Filter
+{
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 9%;
+}
+.mat-column-phone,
+.mat-column-phone_Filter
+ {
+  color:#566787;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 0 0 8%;
+}
+
+.mat-column-actions
+{
+  flex: 0 0 5%;
+}
+
+  .mat-form-field
+   {
+    font-size: 14px;
+    flex-grow: 1;
+    margin-top: 8px;
+    width:10%;
+    color:black;
+  }
+ .second_header{
+  background-color:white;
+  color:black;
+  margin-left:0px;
+ }
+ .first_header{
+  background-color:#566787;
+}
+.mat-header-cell{
+  color:whitesmoke;
+}
+.add_icon{
+  color:white;
+}
+.delete_icon{
+color:white;
+}
+.filter_icon{
+color:black;
+}
+.mat-form-field
+{
+  margin-right:2px;
+  margin-bottom:-5px;
+  border: black;
+  font-size: 8pt;
+}

@@ -1,0 +1,121 @@
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/6e85edcc00.js"></script>
+    <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet" />   
+
+<mat-toolbar class="table_toolbar_1">
+    <mat-icon class="myIcon">email</mat-icon><span class="mySpan"> Mail Compose</span>
+    <span class="spacer"></span>
+    <!-- <form >      
+        <div>
+          <input type="file" name="file" multiple (change)="selectMultipleFiles($event)" class="inputfile" />
+        </div>
+    </form> -->
+    <button mat-flat-button color="warn" (click)="onSubmit()"><mat-icon>send</mat-icon> Send</button>
+    <button mat-flat-button color="warn" (click)="onPreview()"><mat-icon>preview</mat-icon> Preview</button>
+    <button mat-flat-button color="warn" [routerLink]="'/data-table'" ><mat-icon>people</mat-icon> User Details</button>
+</mat-toolbar>
+<div class="t1">  
+	<div class = "table_a">
+    <div class="mat-elevation-z8">
+<mat-table [dataSource]="dataSource"  matSort>
+ 
+<!--Expanded Content Column -The detail row is made up of this one column that spans across all columns-->
+<ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>SNo.</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    
+</ng-container>
+<ng-container matColumnDef="fullName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.firstName.toString()+' '+element.lastName.toString()}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    
+</ng-container>
+
+<ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    
+</ng-container>
+<ng-container matColumnDef="companyName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Company</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.companyName}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="country">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.country}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="city">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="addressLine1">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Address Line 1</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.addressLine1}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="addressLine2">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Address Line 2</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.addressLine2}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="zipCode">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Zip Code</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.zipCode}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
+</ng-container>
+<mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table_header"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+<mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></mat-footer-row>
+</mat-table>
+<!-- <mat-paginator  #scheduledOrdersPaginator
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
+</div>
+<div class = "mailCompose_b">
+    <form [formGroup]="editorForm" >
+    <mat-form-field class="mail_subjet" appearance="outline">
+        <mat-label>Subject:</mat-label>
+        <input matInput  placeholder="Ex. Partnership" [formControl]='getSubject' (change)="ongetSubject()">
+    </mat-form-field>
+    <div class="merge">
+    <mat-form-field class="merge_field" appearance="outline">
+        <mat-label>INSERT MERGE FIELD</mat-label>
+        <select matNativeControl (change)="selectOption($event)">
+          <option value="Insert Merge Field"></option>
+          <option *ngFor="let option of Headers" [value]="option.value"
+                  [selected]="selectedOption === option.value">{{ option.viewValue }}</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <quill-editor [styles]="{height: '620px'}" 
+	(onFocus)="focus($event)" 
+	(onEditorChanged)="changedEditor($event)"
+	(onBlur)="blur($event)" 
+    (onEditorCreated)="created($event)"  
+    formControlName="editor"></quill-editor>
+</form>
+<!-- <div class="fileUpload">
+     <input type="file" name="file" multiple (change)="selectMultipleFiles($event)" class="inputfile" />
+</div> -->
+<div class="drop">
+    <ngx-dropzone (change)="selectMultipleFiles($event)" class="drop_zone">
+        <ngx-dropzone-label><mat-icon>attach_file</mat-icon><span> DROP FILE or click to CHOOSE FILE</span></ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+    </ngx-dropzone>
+</div>
+</div>
+</div>
+    

@@ -1,0 +1,66 @@
+<div class="t1">
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+      <!--Textarea for demo purposes-->
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="firstName" [(ngModel)]="data.firstName" name="firstName" >
+        </mat-form-field>
+      </div>
+  
+      <!--Contains mat-hint for characters count and has maxLengt set-->
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput  placeholder="lastName" [(ngModel)]="data.lastName" name="lastName"  >        
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+          <mat-form-field color="accent">
+            <input matInput placeholder="email" [(ngModel)]="data.email" name="email">
+          </mat-form-field>
+      </div>
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="Company Name" [(ngModel)]="data.companyName" name="companyName">
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="addressLine1" [(ngModel)]="data.addressLine1" name="addressLine1">
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="addressLine2" [(ngModel)]="data.addressLine2" name="addressLine2">
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="city" [(ngModel)]="data.city" name="city">
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="country" [(ngModel)]="data.country" name="country">
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="zipcode" [(ngModel)]="data.zipCode" name="zipCode">
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput placeholder="phone" [(ngModel)]="data.phone" name="phone">
+        </mat-form-field>
+      </div>
+  
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </form>
+  </div>

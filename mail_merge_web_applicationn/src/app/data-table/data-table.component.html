@@ -1,0 +1,270 @@
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    
+        <mat-toolbar class="table_toolbar">
+        
+          <mat-icon class="myIcon">people_alt</mat-icon><span class="mySpan"> User Details</span>
+       <span class="spacer"></span>
+        <mat-form-field>
+          <mat-label class="search_label"><mat-icon class="search_icon">search</mat-icon></mat-label>
+          <input matInput  [ngModel]="globalFilter" (ngModelChange)="applyFilter($event)" placeholder="Ex.company">
+        </mat-form-field>
+        <button mat-flat-button color="warn" (click)="resetFilters()"><mat-icon>refresh</mat-icon> Refresh</button>
+        <button mat-flat-button color="warn" [routerLink]="'/mail-compose'" ><mat-icon>email</mat-icon> Compose</button>
+    
+        </mat-toolbar>
+    
+        <!-- <div class="filter1">
+            <mat-form-field *ngFor="let filter of filterSelectObj" style="margin-left: 7px;">
+              <mat-label><mat-icon>filter_list</mat-icon> {{filter.name}}</mat-label>
+              <mat-select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+                (change)="filterChange(filter,$event)">
+                <mat-option value="">-- Select {{filter.name}} --</mat-option>
+                <mat-option [value]="item" *ngFor="let item of filter.options">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>  -->
+<div class="mat-elevation-z8">      
+<mat-table #table [dataSource]="dataSource"  matSort>
+
+<ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox #ref (change)="$event ? masterToggle($event) : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      
+                      >
+        </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <mat-checkbox #ref (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      (change)="selectData(row, $event )"
+                      
+                      >
+        </mat-checkbox>
+        
+    </mat-cell>
+</ng-container> 
+
+<!--Expanded Content Column -The detail row is made up of this one column that spans across all columns-->
+<ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>SNo.
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="firstName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>First Name
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="lastName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="companyName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Company</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.companyName}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="country">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.country}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="city">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="addressLine1">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Address Line 1</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.addressLine1}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="addressLine2">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Address Line 2</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.addressLine2}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="zipCode">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Zip Code</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.zipCode}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
+</ng-container>
+<!--actions-->
+<ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef >
+    <button mat-icon-button class="add_icon" (click)="addNew()">
+          <mat-icon color="white">add</mat-icon>
+        </button>
+        <button mat-icon-button class="delete_icon" (click)="deleteSelectedRows()">
+            <mat-icon color="white">delete</mat-icon>
+        </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row; let i = index">
+        <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.firstName, row.lastName, row.email, row.companyName, row.country, row.city, row.addressLine1, row.addressLine2, row.zipCode, row.phone)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.firstName, row.lastName, row.email, row.companyName, row.country, row.city, row.addressLine1, row.addressLine2, row.zipCode, row.phone)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+    </mat-cell>
+  <!-- filter_rows -->
+  <ng-container matColumnDef="id_Filter">
+    <mat-header-cell *matHeaderCellDef><mat-icon class="filter_icon">filter_alt</mat-icon></mat-header-cell>
+    </ng-container>
+  <ng-container matColumnDef="firstName_Filter">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-form-field *ngFor="let filter of first_Name" appearance="outline">
+        <input matInput class="form-field" [formControl]="firstnameFilter" placeholder="First Name" [matAutocomplete]="auto" >
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filter.options" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>  
+    </mat-header-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName_Filter">
+      <mat-header-cell *matHeaderCellDef>
+      <mat-form-field *ngFor="let filter of last_Name" appearance="outline" margin="10px">
+        <input matInput class="form-field" [formControl]="lastnameFilter" placeholder="Last Name" [matAutocomplete]="auto1" >
+        <mat-autocomplete #auto1="matAutocomplete">
+          <mat-option *ngFor="let option of filter.options" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      </mat-header-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="email_Filter">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-form-field *ngFor="let filter of email_Name" appearance="outline">
+            <input matInput class="form-field" [formControl]="emailFilter" placeholder="Email" [matAutocomplete]="auto2" >
+            <mat-autocomplete #auto2="matAutocomplete">
+              <mat-option *ngFor="let option of filter.options" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </mat-header-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="company_Filter">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-form-field *ngFor="let filter of company_Name" appearance="outline">
+              <input matInput class="form-field" [formControl]="companyFilter" placeholder="Company" [matAutocomplete]="auto3" >
+              <mat-autocomplete #auto3="matAutocomplete">
+                <mat-option *ngFor="let option of filter.options" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </mat-header-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="country_Filter">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-form-field *ngFor="let filter of country_Name" appearance="outline">
+                <input matInput class="form-field" [formControl]="countryFilter" placeholder="country" [matAutocomplete]="auto4" >
+                <mat-autocomplete #auto4="matAutocomplete">
+                  <mat-option *ngFor="let option of filter.options" [value]="option">
+                    {{ option }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-header-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="city_Filter">
+              <mat-header-cell *matHeaderCellDef>
+                <mat-form-field *ngFor="let filter of city_Name" appearance="outline">
+                  <input matInput class="form-field" [formControl]="cityFilter" placeholder="city" [matAutocomplete]="auto5" >
+                  <mat-autocomplete #auto5="matAutocomplete">
+                    <mat-option *ngFor="let option of filter.options" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </mat-header-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="address1_Filter">
+                <mat-header-cell *matHeaderCellDef>
+                  <mat-form-field *ngFor="let filter of address_1" appearance="outline">
+                    <input matInput class="form-field" [formControl]="address1Filter" placeholder="address Line 1" [matAutocomplete]="auto6" >
+                    <mat-autocomplete #auto6="matAutocomplete">
+                      <mat-option *ngFor="let option of filter.options" [value]="option">
+                        {{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </mat-header-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="address2_Filter">
+                  <mat-header-cell *matHeaderCellDef>
+                    <mat-form-field *ngFor="let filter of address_2" appearance="outline">
+                      <input matInput class="form-field" [formControl]="address2Filter" placeholder="address Line 2" [matAutocomplete]="auto7" >
+                      <mat-autocomplete #auto7="matAutocomplete">
+                        <mat-option *ngFor="let option of filter.options" [value]="option">
+                          {{ option }}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </mat-header-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="zipcode_Filter">
+                    <mat-header-cell *matHeaderCellDef>
+                      <mat-form-field *ngFor="let filter of zipcode_Number" appearance="outline">
+                        <input matInput class="form-field" [formControl]="zipCodeFilter" placeholder="zip code" [matAutocomplete]="auto8" >
+                        <mat-autocomplete #auto8="matAutocomplete">
+                          <mat-option *ngFor="let option of filter.options" [value]="option">
+                            {{ option }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </mat-header-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="phone_Filter">
+                      <mat-header-cell *matHeaderCellDef>
+                        <mat-form-field *ngFor="let filter of phone_Number" appearance="outline">
+                          <input matInput class="form-field" [formControl]="phoneFilter" placeholder="Phone" [matAutocomplete]="auto9" >
+                          <mat-autocomplete #auto9="matAutocomplete">
+                            <mat-option *ngFor="let option of filter.options" [value]="option">
+                              {{ option }}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </mat-header-cell>
+                      </ng-container>
+
+
+    
+</ng-container>
+<mat-header-row *matHeaderRowDef="displayedColumns" class="first_header"></mat-header-row>
+<mat-header-row *matHeaderRowDef="['id_Filter','firstName_Filter','lastName_Filter',
+                                    'email_Filter','company_Filter','country_Filter',
+                                    'city_Filter','address1_Filter','address2_Filter',
+                                    'zipcode_Filter','phone_Filter']" class='second_header'></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+
+
+</mat-table>
+
+<mat-paginator  #scheduledOrdersPaginator
+  [pageSize]="13"
+  [pageSizeOptions]="[5,10,13,20]" (page)="pageChange()"></mat-paginator>
+
+</div>
+
