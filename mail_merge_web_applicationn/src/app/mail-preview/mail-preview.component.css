@@ -1,8 +1,10 @@
 .t3
 {
     width:100%;
+    max-height: 500vh;
 }
 .t4 button
 {
     margin:3px;
+  
 }
