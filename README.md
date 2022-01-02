@@ -18,3 +18,7 @@ Its a custom mail sender. Integrating and leveraging the technology of angular f
    Microsoft sql serve studio<br>
 ## ARCHITECTURE
 ![MAIL MERGE ARCHITECTURE](https://user-images.githubusercontent.com/56751154/147874342-fd153041-649a-4973-945b-a26c80e4f777.png)
+## WORKING SCREEN SHOTS
+![USER DETAILS](https://user-images.githubusercontent.com/56751154/147874505-a2eebcf9-8b0a-45cd-96a6-8f82f254ff60.png)
+![MAIL ![MERGE FIELD PROPERTY](https://user-images.githubusercontent.com/56751154/147874509-327e5caa-d48d-47d0-85a6-1a95fc26e5a8.png)
+COMPOSE](https://user-images.githubusercontent.com/56751154/147874507-36add93b-dad2-4b10-8512-862338e24f37.png)
