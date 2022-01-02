@@ -16,3 +16,5 @@ Its a custom mail sender.
    CRUD operations<br>
 4. Database concetivity used<br>
    Microsoft sql serve studio<br>
+## ARCHITECTURE
+![MAIL MERGE ARCHITECTURE](https://user-images.githubusercontent.com/56751154/147874342-fd153041-649a-4973-945b-a26c80e4f777.png)
