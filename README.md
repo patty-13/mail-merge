@@ -11,7 +11,7 @@ Check demo-video!!!
 ##   Back End<br>
 2. Nodejs<br>
    Multer : (storing uploaded files)<br>
-   nodemailer: (sending mails via smto with attachments)<br>
+   nodemailer: (sending mails via smtp with attachments)<br>
 ##   Rest-Api<br>
 3. Spring Boot (data-book api)<br>
    CRUD operations<br>
